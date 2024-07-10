@@ -29,15 +29,15 @@ const Home = () => {
 
   return (
     <div className='p-4'>
-      <div className='flex justify-center items-center gap-x-4'>
+      <div className='flex justify-center items-center gap-x-4 bg-sky-700 p-3 min-w-full  rounded-2xl'>
         <button
-          className='bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg'
+          className='bg-sky-300 hover:bg-sky-800 px-10 py-1 rounded-lg'
           onClick={() => setShowType('table')}
         >
           Table
         </button>
         <button
-          className='bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg'
+          className='bg-sky-300 hover:bg-sky-800 px-10 py-1 rounded-lg'
           onClick={() => setShowType('card')}
         >
           Card
