@@ -20,11 +20,13 @@ Database: MongoDB
 
 
 ## Getting Started
+
 ### Prerequisites:
 
 Node.js and npm , installed on your system.
 You can download them from the official Node.js website: https://nodejs.org/en
-Installation:
+
+## Installation:
 
 ### Clone this repository:
 
@@ -36,7 +38,7 @@ Replace <your-username> with your actual GitHub username.
 
 Navigate to the project directory:
 
-cd book-store
+`cd book-store`
 חשוב להשתמש בקוד בזהירות.
 ### content_copy
 Install dependencies:
@@ -53,4 +55,4 @@ Start the development server:
 content_copy
 This will typically start the Node.js server and the React development server, usually running on http://localhost:3000 by default.
 
-Open http://localhost:3000 in your web browser to access the application.
+Open http://localhost:5555 in your web browser to access the application.
