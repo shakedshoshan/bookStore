@@ -1,15 +1,19 @@
 
 # BookStore
 
-This MERN stack application allows you to manage your book collection. You can add, delete, update, and view information about your favorite books.
+This MERN stack application is a self-education project, that allows you to manage your book collection. You can add, delete, update, and view information about your favorite books.
 
 ![image](https://github.com/shakedshoshan/bookStore/assets/121875226/89ad948f-f54f-4ed7-9feb-67fc301d2a31)
 
 ## Features
 Add Books: Effortlessly add new books to your collection by providing details like title, author and publication date.
+
 Delete Books: Remove books from your collection that you no longer own or want to keep track of.
+
 Update Books: Keep your information current by editing existing book entries.
+
 View Books: Browse your book collection and see details about each book.
+
 
 ## Technologies
 Frontend: React.js
