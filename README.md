@@ -13,39 +13,42 @@ View Books: Browse your book collection and see details about each book.
 
 ## Technologies
 Frontend: React.js
+
 Backend: Node.js with Express.js
+
 Database: MongoDB
 
 
 ## Getting Started
 ### Prerequisites:
 
-Node.js and npm , installed on your system. You can download them from the official Node.js website: https://nodejs.org/en
+Node.js and npm , installed on your system.
+You can download them from the official Node.js website: https://nodejs.org/en
 Installation:
 
 ### Clone this repository:
 
 Bash
-> git clone https://github.com/<your-username>/book-store.git
+`git clone https://github.com/<your-username>/book-store.git`
 חשוב להשתמש בקוד בזהירות.
 content_copy
-> Replace <your-username> with your actual GitHub username.
+Replace <your-username> with your actual GitHub username.
 
 Navigate to the project directory:
 
-> cd book-store
+cd book-store
 חשוב להשתמש בקוד בזהירות.
-content_copy
+### content_copy
 Install dependencies:
 
-> npm install
+`npm install`
 חשוב להשתמש בקוד בזהירות.
 content_copy
 
-###Running the Application
+### Running the Application
 Start the development server:
 
-> npm start
+`npm start`
 חשוב להשתמש בקוד בזהירות.
 content_copy
 This will typically start the Node.js server and the React development server, usually running on http://localhost:3000 by default.
