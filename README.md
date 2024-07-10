@@ -5,13 +5,13 @@ This MERN stack application allows you to manage your book collection. You can a
 
 ![image](https://github.com/shakedshoshan/bookStore/assets/121875226/89ad948f-f54f-4ed7-9feb-67fc301d2a31)
 
-Features
+*Features*
 Add Books: Easily add new books to your collection by providing details like title, author, publication date.
 Delete Books: Remove books from your collection that you no longer own or want to keep track of.
 Update Books: Edit existing book entries to keep your information current.
 View Books: Browse your book collection and see details about each book.
 
-Technologies
+*Technologies*
 Frontend: React.js
 Backend: Node.js with Express.js
 Database: MongoDB
