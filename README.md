@@ -1,5 +1,5 @@
-
-# BookStore
+ 
+# Book Store Stock Managment
 
 This MERN stack application is a self-education project, that allows you to manage your book collection. You can add, delete, update, and view information about your favorite books.
 
