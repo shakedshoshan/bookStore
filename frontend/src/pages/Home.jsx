@@ -5,20 +5,20 @@ import { Link } from 'react-router-dom';
 import { AiOutlineEdit } from 'react-icons/ai';
 import { BsInfoCircle } from 'react-icons/bs';
 import { MdOutlineAddBox, MdOutlineDelete } from 'react-icons/md';
-import BooksTable from '../components/home/BooksTable';
 import BooksCard from '../components/home/BooksCard';
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/clerk-react";
 
 const Home = () => {
-  const [books, setBooks] = useState([]);
+  const [leagues, setLeagues] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showType, setShowType] = useState('table');
 
   useEffect(() => {
     setLoading(true);
     axios
-      .get('http://localhost:5555/books')
+      .get('http://localhost:5555/leagues')
       .then((response) => {
-        setBooks(response.data.data);
+        setLeagues(response.data.data);
         setLoading(false);
       })
       .catch((error) => {
@@ -27,34 +27,30 @@ const Home = () => {
       });
   }, []);
 
+
   return (
     <div className='p-4'>
-      <div className='flex justify-center items-center gap-x-4 bg-sky-700 p-3 min-w-full  rounded-2xl'>
-        <button
-          className='bg-sky-300 hover:bg-sky-800 px-10 py-1 rounded-lg'
-          onClick={() => setShowType('table')}
-        >
-          Table
-        </button>
-        <button
-          className='bg-sky-300 hover:bg-sky-800 px-10 py-1 rounded-lg'
-          onClick={() => setShowType('card')}
-        >
-          Card
-        </button>
-      </div>
       <div className='flex justify-between items-center'>
-        <h1 className='text-3xl my-8'>Books List</h1>
-        <Link to='/books/create'>
-          <MdOutlineAddBox className='text-sky-800 text-4xl' />
+        <h1 className='text-3xl my-8'>All Tables</h1>
+        <div className='flex flex-row space-x-5'>
+        <Link to='/home/leagues/create'>
+          <div className='flex flex-row items-center space-x-2 p-2 rounded-lg bg-[#91dae7] hover:bg-[#52d5ec]'>
+          <MdOutlineAddBox className='text-sky-800 text-2xl' />
+          <h2 className='text-1xl text-sky-800'>Create League</h2>
+          </div>
         </Link>
+        <div className='flex flex-row items-center space-x-2 p-2 rounded-lg bg-[#91dae7] hover:bg-[#52d5ec]'>
+        
+          <MdOutlineAddBox className='text-sky-800 text-2xl' />
+       
+        <h2 className='text-1xl text-sky-800'>Join League</h2>
+        </div>
+        </div>
       </div>
       {loading ? (
         <Spinner />
-      ) : showType === 'table' ? (
-        <BooksTable books={books} />
       ) : (
-        <BooksCard books={books} />
+        <BooksCard leagues={leagues} />
       )}
     </div>
   );

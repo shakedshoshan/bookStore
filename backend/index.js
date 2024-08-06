@@ -1,7 +1,8 @@
 import express from 'express';
 import { PORT, mongoURL } from "./config.js"
 import mongoose from 'mongoose';
-import router from './routes/books.routes.js';
+import userRouter from './routes/user.routes.js';
+import leagueRouter from './routes/league.routes.js';
 import cors from 'cors';
 
 
@@ -20,7 +21,8 @@ app.get('/', (request, response) => {
     return response.status(234).send('Welcome To MERN Stack Tutorial');
   });
 
-app.use('/books', router);
+app.use('/users', userRouter);
+app.use('/leagues', leagueRouter);
 
 mongoose
   .connect(mongoURL)
