@@ -4,6 +4,11 @@ import mongoose from 'mongoose';
 import userRouter from './routes/user.routes.js';
 import leagueRouter from './routes/league.routes.js';
 import cors from 'cors';
+import jwt from 'jsonwebtoken';
+import cookieParser from 'cookie-parser';
+import dotenv from 'dotenv';
+// const cookieParser = require('cookie-parser');
+dotenv.config();
 
 
 
@@ -13,6 +18,8 @@ app.use(express.json());
 
 // Middleware for handling CORS POLICY
 app.use(cors());
+app.use(cookieParser());
+
 
 
 

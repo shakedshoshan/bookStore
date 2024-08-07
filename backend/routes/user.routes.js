@@ -1,7 +1,27 @@
 import express from 'express';
 import { User } from '../models/userModel.js';
+import jwt from 'jsonwebtoken';
+import cookie from 'cookie';
+import Cookies from 'js-cookie';
+import cookieParser from 'cookie-parser';
+// import cookieJwtAuth from "../../middleware/jwtAuth.js"
+
 
 const userRouter = express.Router();
+
+// verify token validity
+userRouter.get('/token', async (req, res) => {
+  //const token = req['Authorization']?.split(' ')[1] || '';
+  const token = req.body.token;
+  console.log(token);
+  try{
+    const decoded = jwt.verify(token, process.env.jwtSecret);
+    res.status(200).send({data: decoded}); 
+    res.json({ message: 'Token is valid' });
+  }catch(e){
+    res.status(401).json({ message: 'Token is not valid' });
+  }
+})
 
 
 // new user when sign up
@@ -32,7 +52,7 @@ userRouter.post('/signup', async (request, response) => {
   }
 });
 
-  // login user when sign in
+  // login user
   userRouter.post('/login', async (request, response) => {
     try {
       const { name, password } = request.body;
@@ -50,13 +70,27 @@ userRouter.post('/signup', async (request, response) => {
         return response.status(400).json({ message: 'User Not exists' });
       }
   
-      return response.json("exist")
+      // Create JWT
+      const token = jwt.sign({ name: existingUser.name }, process.env.jwtSecret, { expiresIn: '2h' });
+      console.log(token);
+
+      response.cookie("userData", token); 
+
+  
+      // Set JWT as an HTTP-only cookie (before sending response)
+      response.setHeader(
+        "Set-Cookie",
+        cookie.serialize("token", token, {path:"/",  httpOnly: true, maxAge: 60 * 60 })
+      );
+  
+      // Send successful login response
+      return response.json("exist");
     } catch (error) {
       console.error('Error in user registration:', error);
       return response.status(500).json({ message: 'Internal server error' });
     }
   });
-
+  
   //get all league
   userRouter.get('/allUsers', async (req, res) => {
     try {
