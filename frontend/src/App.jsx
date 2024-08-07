@@ -7,14 +7,14 @@ import EditBook from './pages/EditBook';
 import DeleteBook from './pages/DeleteBook';
 import LeagueTable from './pages/LeagueTable';
 import Login from './pages/Login';
-import { SignUp } from '@clerk/clerk-react';
+import Signup from './pages/Signup';
 
 const App = () => {
   return (
     <div className='bg-sky-100 h-max mt-40'>
     <Routes >
       <Route path='/' element={<Login />} />
-      <Route path='/signup' element={<SignUp />} />
+      <Route path='/signup' element={<Signup />} />
       <Route path='/home' element={<Home />} />
       <Route path='/home/leagues/create' element={<CreateLeague />} />
       <Route path='/home/league/details/:id' element={<LeagueTable />} />

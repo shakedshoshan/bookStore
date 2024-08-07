@@ -10,30 +10,26 @@ function Login() {
     const [name,setUserName]=useState('')
     const [password,setPassword]=useState('')
 
-    async function submit(e){
+    async function submit(e) {
         e.preventDefault();
-
-        try{
-            await axios.get("http://localhost:5555/users", {params: {"name":name,"password":password}})
-            .then((response) => {
-                if(response.data === "exist"){
-                    history("/home",{state:{id:name}})
-                }
-                else {
-                    alert("User have not sign up")
-                }
-            })
-            .catch(e=>{
-                alert("wrong details")
-                //console.log(e);
-            })
-
+    
+        try {
+            const response = await axios.post("http://localhost:5555/users/login", { name: name, password: password });
+    
+            console.log(response);
+            if (response.data === "exist") {
+                history("/home", { state: { id: name } });
+            } else {
+                alert("User has not signed up");
+            }
+        } catch (error) {
+            if (error.response) {
+                alert(error.response.data.message || "An error occurred");
+            } else {
+                alert("Error connecting to the server");
+            }
+            console.log(error);
         }
-        catch(e){
-            console.log(e);
-
-        }
-
     }
 
 

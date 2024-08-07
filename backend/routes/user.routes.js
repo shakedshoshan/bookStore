@@ -5,41 +5,35 @@ const userRouter = express.Router();
 
 
 // new user when sign up
-userRouter.post('/', async (request, response) => {
-  const check=await User.findOne({name:request.body.name})
-  
-    try {
-      if(!check){
-        response.json("exist")
-        return response.status(400).send({ message: 'User already exists' });
-      }
+userRouter.post('/signup', async (request, response) => {
+  try {
+    const { name, password } = request.body;
 
-      if (
-        !request.body.name,
-        !request.body.password
-      ) {
-        return response.status(400).send({
-          message: 'Send all required fields: name or password',
-        });
-      }
-      const newUser = {
-        name: request.body.name,
-        password: request.body.password,
-      };
-  
-      const user = await User.create(newUser);
-  
-      return response.status(201).send(user);
-    } catch (error) {
-
-
-      console.log(error.message);
-      response.status(500).send({ message: error.message });
+    // Check if required fields are present
+    if (!name || !password) {
+      return response.status(400).json({
+        message: 'Send all required fields: name and password',
+      });
     }
-  });
+
+    // Check if user already exists
+    const existingUser = await User.findOne({ name });
+    if (existingUser) {
+      return response.status(400).json({ message: 'Username is unavailable' });
+    }
+
+    // Create new user
+    const newUser = await User.create({ name, password });
+
+    return response.status(201).json("success");
+  } catch (error) {
+    console.error('Error in user signup:', error);
+    return response.status(500).json({ message: 'Internal server error' });
+  }
+});
 
   // login user when sign in
-  userRouter.get('/', async (request, response) => {
+  userRouter.post('/login', async (request, response) => {
     try {
       const { name, password } = request.body;
   
@@ -63,18 +57,18 @@ userRouter.post('/', async (request, response) => {
     }
   });
 
-  // //get all league
-  // userRouter.get('/', async (req, res) => {
-  //   try {
-  //     const users = await User.find({});
-  //     return res.status(200).json({
-  //       count: users.length,
-  //       data: users});
-  //   } catch (error) {
-  //     console.error(error.message);
-  //     res.status(500).send({massage:error.message});
-  //   }
-  // });
+  //get all league
+  userRouter.get('/allUsers', async (req, res) => {
+    try {
+      const users = await User.find({});
+      return res.status(200).json({
+        count: users.length,
+        data: users});
+    } catch (error) {
+      console.error(error.message);
+      res.status(500).send({massage:error.message});
+    }
+  });
 
   //get one book
   userRouter.get('/:id', async (req, res) => {

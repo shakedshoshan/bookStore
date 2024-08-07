@@ -3,62 +3,51 @@ import axios from "axios"
 import { useNavigate, Link } from "react-router-dom"
 
 
-function Signup() {
+function Signun() {
+
     const history=useNavigate();
 
-    const [userName,setUserName]=useState('')
+    const [name,setUserName]=useState('')
     const [password,setPassword]=useState('')
 
-    // async function submit(e){
-    //     e.preventDefault();
-
-    //     try{
-
-    //         await axios.post("http://localhost:5555/users",{
-    //             userName,password
-    //         })
-    //         .then(res=>{
-    //             if(res.data=="exist"){
-    //                 alert("User already exists")
-    //             }
-    //             else if(res.data=="notexist"){
-    //                 history("/home",{state:{id:userName}})
-    //             }
-    //         })
-    //         .catch(e=>{
-    //             alert("wrong details")
-    //             console.log(e);
-    //         })
-
-    //     }
-    //     catch(e){
-    //         console.log(e);
-
-    //     }
-
-    // }
+    async function submit(e) {
+        e.preventDefault();
+    
+        try {
+            const response = await axios.post("http://localhost:5555/users/signup", { name: name, password: password });
+    
+            console.log(response);
+            if (response.data === "success") {
+                history("/home", { state: { id: name } }); 
+                alert("New User successfully created")
+            } else {
+                alert("User has not signed up");
+            }
+        } catch (error) {
+            if (error.response) {
+                alert(error.response.data.message || "An error occurred");
+            } else {
+                alert("Error connecting to the server");
+            }
+            console.log(error);
+        }
+    }
 
 
     return (
-        <div className="Signup">
+        <div className="justify-center items-center ml-96 p-5 space-y-4">
 
-            <h1>Signup</h1>
+            <h1>Sing up</h1>
 
-            <form action="POST">
-                <input type="email" onChange={(e) => { setUserName(e.target.value) }} placeholder="Email"  />
-                <input type="password" onChange={(e) => { setPassword(e.target.value) }} placeholder="Password" />
-                <input type="submit" onClick={submit} />
-
+            <form className="flex flex-col space-y-2 max-w-40 " action="POST">
+                <input type="text" onChange={(e) => { setUserName(e.target.value) }} placeholder="User Name"  />
+                <input type="password" onChange={(e) => { setPassword(e.target.value) }} placeholder="Password"  />
+                <button onClick={submit} className="p-2 rounded-lg bg-[#91dae7] hover:bg-[#52d5ec]">Submit</button>
+                {/* <input type="submit" onClick={submit} /> */}
             </form>
-
-            <br />
-            <p>OR</p>
-            <br />
-
-            <Link to="/">Login Page</Link>
 
         </div>
     )
 }
 
-export default Signup
+export default Signun
